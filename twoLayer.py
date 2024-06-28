@@ -1,11 +1,20 @@
 import pandas as pd
 import numpy as np
+from PIL import Image
+from skimage import io, color, util, transform
+
 
 data = pd.read_csv('train.csv')
 # print(data)
 data = np.array(data)
 m ,n = data.shape
 np.random.shuffle(data)
+
+
+# test.shape = (784,1)
+# test = np.array(list(map(lambda el:[el], test)))
+# print(test)
+# test = transform.resize(test, (1, 784))
 
 def min_max_normalize(set : np.array):
     return (set - np.min(set))/(np.max(set) - np.min(set))
@@ -20,6 +29,9 @@ data_test = data[int(2*m/3):m].T
 labels_test = data_test[0]
 x_test = data_test[1:n]
 x_test = min_max_normalize(x_test)
+
+# x_test = x_test.join(test.T)
+
 
 
 # x_train = x_train / 255.0

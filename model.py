@@ -7,10 +7,12 @@ data = np.array(data)
 m ,n = data.shape
 np.random.shuffle(data)
 
+
+
 def min_max_normalize(set : np.array):
     return (set - np.min(set))/(np.max(set) - np.min(set))
 
-# print(data)
+# print(data)z
 data_train = data[0:2000].T
 labels_train = data_train[0]
 x_train = data_train[1:n]
