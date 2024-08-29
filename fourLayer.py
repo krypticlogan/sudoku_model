@@ -19,8 +19,8 @@ def min_max_normalize(set : np.array):
     return (set - np.min(set))/(np.max(set) - np.min(set))
 
 # print(data)
-# data_train = data[0:int(2*m/3)].T
-data_train = data.T
+data_train = data[0:int(2*m/3)].T
+# data_train = data.T
 labels_train = data_train[0]
 x_train = data_train[1:n]
 # print(x_train.shape)
@@ -43,11 +43,11 @@ x_test = min_max_normalize(x_test)
 # x_train.shape
 
 def init_params():
-    w1 = np.random.rand(18,784) - 0.5
-    b1 = np.random.rand(18,1) - 0.5
-    w2 = np.random.rand(12,18) - 0.5
-    b2 = np.random.rand(12,1) - 0.5
-    w3 = np.random.rand(10,12)- 0.5
+    w1 = np.random.rand(54,784) - 0.5
+    b1 = np.random.rand(54,1) - 0.5
+    w2 = np.random.rand(54,54) - 0.5
+    b2 = np.random.rand(54,1) - 0.5
+    w3 = np.random.rand(10,54)- 0.5
     b3 = np.random.rand(10,1)- 0.5
     return w1, b1, w2, b2, w3, b3
 
@@ -124,8 +124,10 @@ def get_predictions(a):
 def get_accuracy(predictions, y):
     return np.sum(predictions == y) / y.size
 
-def gradient_descent(x, y, iterations, rate):
-    w1, b1, w2, b2, w3, b3 = init_params()
+def gradient_descent(x, y, iterations, rate, w1=None, b1=None, w2=None, b2=None, w3=None, b3=None):
+
+    if not w1:
+        w1, b1, w2, b2, w3, b3 = init_params()
     # last_accuracy = 0
     # first = 0
     load = '----------------------------------------------------------|'
@@ -145,9 +147,9 @@ def gradient_descent(x, y, iterations, rate):
        
         p = get_accuracy(get_predictions(a3), y)
         if iteration < iterations-1:
-            print(f'{load} {p}', end='\r')
+            print(f'{load} {p} {iteration}/{iterations}', end='\r')
         else:
-            print(f'{load} {p}')
+            print(f'{load} {p} {iteration}/{iterations} complete')
 
     return w1, b1, w2, b2, w3, b3
 

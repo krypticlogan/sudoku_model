@@ -13,15 +13,15 @@ def min_max_normalize(set : np.array):
     return (set - np.min(set))/(np.max(set) - np.min(set))
 
 # print(data)z
-data_train = data[0:2000].T
+data_train = data.T
 labels_train = data_train[0]
 x_train = data_train[1:n]
-x_train = (x_train - np.min(x_train))/(np.max(x_train) - np.min(x_train))
+x_train = min_max_normalize(x_train).round()
 
 data_test = data[2000:m].T
 labels_test = data_test[0]
 x_test = data_test[1:n]
-x_test = min_max_normalize(x_test)
+x_test = min_max_normalize(x_test).round()
 
 
 # x_train = x_train / 255.0
@@ -32,9 +32,9 @@ x_test = min_max_normalize(x_test)
 # x_train.shape
 
 def init_params():
-    w1 = np.random.rand(12,784) - 0.5
-    b1 = np.random.rand(12,1) - 0.5
-    w2 = np.random.rand(10,12)- 0.5
+    w1 = np.random.rand(10,784) - 0.5
+    b1 = np.random.rand(10,1) - 0.5
+    w2 = np.random.rand(10,10)- 0.5
 #     print(w2.shape)
     b2 = np.random.rand(10,1)- 0.5
     return w1, b1, w2, b2
@@ -108,10 +108,12 @@ def get_predictions(a):
     return np.argmax(a, 0)
 
 def get_accuracy(predictions, y):
-    return np.sum(predictions == y) / y.size
+    return np.sum(predictions == y) / y.size, np.sum(y**2-predictions**2) / y.size
 
-def gradient_descent(x, y, iterations, rate):
-    w1, b1, w2, b2 = init_params()
+def gradient_descent(x, y, iterations, rate, w1=None, b1=None, w2=None, b2=None):
+
+    if not isinstance(w1, np.ndarray):
+        w1, b1, w2, b2 = init_params()
     # last_accuracy = 0
     # first = 0
     load = '----------------------------------------------------------|'
@@ -134,13 +136,14 @@ def gradient_descent(x, y, iterations, rate):
                 
         # if iteration % 50 == 0:
         #     print(f'iteration : {iteration}')
-      
-        p = get_accuracy(get_predictions(a2), y)
+        preds = get_predictions(a2)
+        # loss = np.sum(preds)
+        p, loss = get_accuracy(preds, y)
         # print(load)
         if iteration < iterations-1:
-            print(f'{load} {p}', end='\r')
+            print(f'{load} {p} {loss}', end='\r')
         else:
-            print(f'{load} {p}')
+            print(f'{load} {p} {loss}')
 
         
         
