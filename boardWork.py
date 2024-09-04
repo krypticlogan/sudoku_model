@@ -1,6 +1,10 @@
 from skimage import io, transform, color
 import cv2
 
+
+# pixel formatting
+
+
 import numpy as np
 
 image = cv2.imread('board.png')
