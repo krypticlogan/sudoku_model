@@ -1,4 +1,5 @@
-from three_hidden import *
+# from three_hidden import *
+from models.model import *
 # from fourLayer import *
 from boardWork import split_grid, get_pixels
 # from PIL import Image
@@ -60,19 +61,25 @@ def main():
         np.random.shuffle(digits)
         # one = digits[0:2]
         m, n = digits.shape
-
         
-        digit_train = digits.T
+        digit_train = digits[0:int(2*m/3)].T
         digit_labels = digit_train[-1]
         x_digit_train = digit_train[0:n-1]
+        print(x_digit_train.shape)
         first_digit = x_digit_train[:,1]
+
+        digit_tet = digits[int(2*m/3):m].T
+        tet_labels = digit_tet[-1]
+        x_digit_tet = digit_tet[0:n-1]
+        # first_digit = x_digit_tet[:,1]
+
         first = x_train[:,1]
         # x_digit_train = min_max_normalize(digit_train[0:n-1])
         print(first_digit[first_digit != 0], first[first != 0], first_digit.shape == first.shape)
-        io.imshow(first.reshape(28,28))
-        io.show()
-        io.imshow(first_digit.reshape(28,28))
-        io.show()
+        # io.imshow(first.reshape(28,28))
+        # io.show()
+        # io.imshow(first_digit.reshape(28,28))
+        # io.show()
         # first.reshape(28)
         # digit_test = digits[int(2*m/3):m].T
         # test_labels = digit_test[-1]
@@ -111,8 +118,8 @@ def main():
    
             image = color.rgb2gray(image)
 
-            io.imshow(image)
-            io.show()
+            # io.imshow(image)
+            # io.show()
 
             # i = 0
             grids = list(split_grid(image))
@@ -135,7 +142,7 @@ def main():
         # test = np.append(test, pixels.T, 1) # should be 2
         # test = np.append(test, pixels2.T, 1) # should be 8
 
-
+        import matplotlib.pyplot as plt
         print('test size' , test.shape)
         grids, test = format_board(test)
         # print(grids)
@@ -147,31 +154,54 @@ def main():
 
         print(board_squares[:,1][board_squares[:,1] != 1], len(board_squares[:,0]))
 
-        rate = .1
-        iters = 1300
+        rate = .05
+        epochs = 800
 
-        w1, b1, w2, b2 = gradient_descent(x_train, labels_train, iters, rate)
+        w1, b1, w2, b2, lossY, accY, validationLoss, validationAcc, _, _ = minibatchGD(x_train, labels_train, epochs, rate,batch_size=np.array(x_train).shape[1], validation=x_test, validKey=labels_test)
         # # print(w1, b1, w2, b2, w3, b3)
 
 
-        # preds = make_predictions(x_test, w1, b1, w2, b2, w3, b3)
-        # print(preds, labels_test)
-        # grid_accuracy = get_accuracy(preds, labels_test)
-        # print(f'test accuracy : {grid_accuracy}')
+        preds = make_predictions(x_test, w1, b1, w2, b2)
+        print(preds, labels_test)
+        grid_accuracy = get_accuracy(preds, labels_test)
+        print(f'test accuracy : {grid_accuracy}')
+
+        plt.plot(lossY, label='loss')
+        plt.plot(validationLoss, label='validation')
+        plt.title('Loss')
+        plt.legend()
+        plt.show()
+        plt.plot(accY*100, label='train')
+        plt.plot(validationAcc*100, label='validation')
+        plt.legend()
+        plt.title('Accuracy')
+        plt.show()
 
 
-
-        w1, b1, w2, b2= gradient_descent(x_digit_train, digit_labels.astype(int), 1300, .12, w1, b1, w2, b2)
+        # rate = .08
+        w1, b1, w2, b2, digiLossY, accY, validationLoss, validationAcc, sudokuLoss, sudokuAcc = minibatchGD(x_digit_train, digit_labels.astype(int), 2000, .09, np.array(x_digit_train).shape[1], validation=x_digit_tet, validKey=tet_labels, w1=w1, b1=b1, w2=w2, b2=b2)
         # # print(w1, b1, w2, b2, w3, b3)
 
+        plt.plot(digiLossY, label='train')
+        plt.plot(validationLoss, label='validation')
+        plt.plot(sudokuLoss, label='sudoku')
+        plt.legend()
+        plt.title('Loss')
+        plt.show()
+        plt.plot(accY*100, label='train')
+        plt.plot(validationAcc*100,label='validation')
+        plt.plot(sudokuAcc*100,label='suoko')
+        plt.legend()
+        plt.title('Accuracy')
+        plt.show()
 
 
 # for printed digits
-        # preds = make_predictions(x_digit_test, w1, b1, w2, b2, w3, b3)
-        # print(preds, test_labels)
-        # print(f'test accuracy : {get_accuracy(preds, test_labels.astype(int))}')
+        preds = make_predictions(x_digit_tet, w1, b1, w2, b2)
+        print(preds, tet_labels)
+        print(f'test accuracy : {get_accuracy(preds, tet_labels.astype(int))}')
 
-
+        
        
 
         # print(test)
