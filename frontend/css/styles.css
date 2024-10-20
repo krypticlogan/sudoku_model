@@ -1,0 +1,135 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #0a5f0a; /* Darker green background to make header stand out */
+    padding: 30px 20px;
+    text-align: center;
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Header drop shadow */
+}
+
+h1 {
+    font-family: 'Poppins', sans-serif; /* New pleasing font */
+    font-size: 3em; /* Larger and bold title */
+    color: #fff;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5); /* Drop shadow for the title */
+}
+
+footer {
+    background-color: #1e1e1e;
+    padding: 20px;
+    text-align: center;
+    color: #006400; /* Dark green */
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.9em;
+    color: #aaa;
+}
+
+.container {
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    flex-grow: 1;
+}
+
+p {
+    margin-bottom: 20px;
+    color: #aaa;
+}
+
+.upload-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center; /* Center the buttons */
+    margin-bottom: 20px;
+}
+
+.custom-file-upload {
+    background-color: #006400;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.custom-file-upload:hover {
+    background-color: #004d00;
+}
+
+#imageInput {
+    display: none; /* Hide the default file input */
+}
+
+#scanButton {
+    padding: 10px;
+    background-color: #006400;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#scanButton:hover {
+    background-color: #004d00;
+}
+
+.output-box {
+    margin-top: 20px;
+}
+
+h2 {
+    margin-bottom: 10px;
+    font-size: 1.5em;
+    color: #006400;
+}
+
+img {
+    max-width: 80%;
+    max-height: 300px; /* Adjusts size for mobile and desktop */
+    border: 4px solid #00ff99; /* Bright green border for highlighting */
+    border-radius: 5px;
+    margin-bottom: 20px;
+    object-fit: contain;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.2em;
+    }
+
+    p, h2 {
+        font-size: 1.2em;
+    }
+
+    img {
+        max-width: 90%; /* Make images a bit smaller on mobile */
+        max-height: 200px;
+    }
+}
