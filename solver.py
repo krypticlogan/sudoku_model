@@ -117,24 +117,23 @@ rec = 0
 def solve(puzzle):
   global rec
   missing = getMissing(puzzle)
-  if not missing:
-    # print('solved')
-    return True
+  # print("missing: ", missing)
+  if missing is None:
+    # print('none')
+    return True, None, None
   else:
+    # print("still missing")
     rec+=1
     x, y = missing
     for i in range(1,10):
       if isValid(puzzle, x,y,i):
         puzzle[x][y] = i
-
-        if solve(puzzle):
-          # print('solved')
-          return True, cleaner(puzzle)
-
-
+        solved, _, _ = solve(puzzle)
+        if solved:
+          # print(solved)
+          return True, cleaner(puzzle), puzzle
         puzzle[x][y] = 0
-
-    return False
+    return False, None, None
 # print("Your Puzzle:")
 # print(puzzle)
 # print()
