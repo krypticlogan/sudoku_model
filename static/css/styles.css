@@ -5,7 +5,7 @@
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: Arial, sans-serif;
     background-color: #121212;
     color: #fff;
     display: flex;
@@ -14,24 +14,18 @@ body {
 }
 
 header {
-    background-color: #064f00; /* Slightly darker green */
-    padding: 40px 20px;
+    background-color: #0a5f0a;
+    padding: 30px 20px;
     text-align: center;
-    color: #ffffff;
+    color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
 h1 {
+    font-family: 'Poppins', sans-serif;
     font-size: 3em;
-    color: #ffffff;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
-    margin-bottom: 5px;
-}
-
-header p {
-    font-size: 1.1em;
-    color: #86ffb5;
-    margin-top: 5px;
+    color: #fff;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
 }
 
 footer {
@@ -41,103 +35,103 @@ footer {
     color: #006400;
 }
 
-footer p {
-    font-size: 0.9em;
-    color: #aaa;
-}
-
 .container {
     text-align: center;
     max-width: 600px;
     width: 100%;
-    margin: 20px auto;
-    padding: 30px;
+    margin: 0 auto;
+    padding: 20px;
     background-color: #1e1e1e;
-    border-radius: 12px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
     flex-grow: 1;
 }
 
 p {
     margin-bottom: 20px;
-    color: #bbb;
+    color: #aaa;
 }
 
 .upload-box {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
     align-items: center;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
-.custom-file-upload {
+.custom-file-upload,
+#scanButton {
     background-color: #006400;
-    color: #ffffff;
-    padding: 12px 24px;
-    border-radius: 8px;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
+    transition: background-color 0.3s;
+    margin: 5px;
+    display: inline-block;
 }
 
-.custom-file-upload:hover {
+.custom-file-upload:hover,
+#scanButton:hover {
     background-color: #004d00;
-    transform: scale(1.05);
 }
 
 #imageInput {
     display: none;
 }
 
-#scanButton {
-    padding: 12px 24px;
-    background-color: #006400;
-    border: none;
-    border-radius: 8px;
-    color: #ffffff;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
-}
-
-#scanButton:hover {
-    background-color: #004d00;
-    transform: scale(1.05);
-}
-
 .output-box {
-    margin-top: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
 }
 
-h2 {
-    margin-bottom: 15px;
-    font-size: 1.5em;
-    color: #86ffb5;
-    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.6);
+.image-wrapper {
+    text-align: center;
+    max-width: 45%;
+}
+
+.image-wrapper h2 {
+    font-size: 1.2em;
+    color: #00aa00;
+    margin-bottom: 10px;
 }
 
 img {
-    max-width: 75%;
-    max-height: 300px;
-    border: 6px solid #2ecc71; /* Brighter green border for emphasis */
-    border-radius: 8px;
-    margin-bottom: 20px;
+    max-width: 100%;
+    height: auto;
+    border: 4px solid #86ffb5;
+    border-radius: 5px;
     object-fit: contain;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+}
+.success-message {
+    color: #28a745; /* Bright green for success */
+    font-size: 0.9em;
+    margin-top: 10px;
+    display: none; /* Hidden by default */
+}
+
+.show-success {
+    display: inline; /* Displays the message when success is triggered */
 }
 
 @media (max-width: 768px) {
+    .output-box {
+        flex-direction: column;
+    }
+
+    .image-wrapper {
+        max-width: 100%;
+    }
+
     h1 {
         font-size: 2.2em;
     }
 
-    header p, h2 {
+    p, h2 {
         font-size: 1.2em;
-    }
-
-    img {
-        max-width: 85%;
-        max-height: 200px;
     }
 }
