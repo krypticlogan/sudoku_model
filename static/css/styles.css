@@ -1,0 +1,143 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #121212;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #064f00; /* Slightly darker green */
+    padding: 40px 20px;
+    text-align: center;
+    color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+h1 {
+    font-size: 3em;
+    color: #ffffff;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+    margin-bottom: 5px;
+}
+
+header p {
+    font-size: 1.1em;
+    color: #86ffb5;
+    margin-top: 5px;
+}
+
+footer {
+    background-color: #1e1e1e;
+    padding: 20px;
+    text-align: center;
+    color: #006400;
+}
+
+footer p {
+    font-size: 0.9em;
+    color: #aaa;
+}
+
+.container {
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
+    margin: 20px auto;
+    padding: 30px;
+    background-color: #1e1e1e;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.7);
+    flex-grow: 1;
+}
+
+p {
+    margin-bottom: 20px;
+    color: #bbb;
+}
+
+.upload-box {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.custom-file-upload {
+    background-color: #006400;
+    color: #ffffff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.custom-file-upload:hover {
+    background-color: #004d00;
+    transform: scale(1.05);
+}
+
+#imageInput {
+    display: none;
+}
+
+#scanButton {
+    padding: 12px 24px;
+    background-color: #006400;
+    border: none;
+    border-radius: 8px;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+#scanButton:hover {
+    background-color: #004d00;
+    transform: scale(1.05);
+}
+
+.output-box {
+    margin-top: 25px;
+}
+
+h2 {
+    margin-bottom: 15px;
+    font-size: 1.5em;
+    color: #86ffb5;
+    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.6);
+}
+
+img {
+    max-width: 75%;
+    max-height: 300px;
+    border: 6px solid #2ecc71; /* Brighter green border for emphasis */
+    border-radius: 8px;
+    margin-bottom: 20px;
+    object-fit: contain;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.2em;
+    }
+
+    header p, h2 {
+        font-size: 1.2em;
+    }
+
+    img {
+        max-width: 85%;
+        max-height: 200px;
+    }
+}

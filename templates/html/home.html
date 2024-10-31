@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku Solver</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet"> <!-- Added Google Font -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Sudoku Solver</h1>
+        <p>by Logan</p>
+    </header>
+
+    <div class="container">
+        <p>Upload an image of a Sudoku board to have it solved automatically.</p>
+        
+        <div class="upload-box">
+            <!-- Single form for both file input and submit button -->
+            <form action="/" method="post" enctype="multipart/form-data">
+                <label for="imageInput" class="custom-file-upload">
+                    Choose Image
+                </label>
+                <input type="file" id="imageInput" name="file" accept="image/*" required>
+
+                <button id="scanButton" type="submit">Scan & Solve</button>
+            </form>
+        </div>
+        
+        <div class="output-box">
+            <h2>Original Image</h2>
+            {% if filename %}
+                <img id="uploadedImage" src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Uploaded Sudoku Image">
+            {% else %}
+                <img id="uploadedImage" src="{{ url_for('static', filename='blank.png') }}" alt="No Image Uploaded">
+            {% endif %}
+            
+            <h2>Solved Sudoku</h2>
+            {% if solved_filename %}
+                <img id="solvedImage" src="{{ url_for('static', filename='uploads/' + solved_filename) }}" alt="Solved Sudoku Image">
+            {% else %}
+                <img id="solvedImage" src="{{ url_for('static', filename='blank.png') }}" alt="No Solved Image">
+            {% endif %}
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Sudoku Solver. All rights reserved.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
